@@ -38,6 +38,7 @@ class UsersRelationManager extends RelationManager
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
                     ->dehydrated(fn ($state) => filled($state))
+                    ->formatStateUsing(fn () => null)
                     ->maxLength(255),
             ]);
     }
