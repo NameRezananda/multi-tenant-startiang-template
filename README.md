@@ -100,17 +100,18 @@ Akses panel admin di `http://saas.test/admin` (jika menggunakan Valet/ServBay) a
 
 Buat tenant baru dengan domain yang diinginkan (contoh: `jakarta`).
 
-### 2. Automasi Setup (Windows)
+### 2. Mendaftarkan Domain/Subdomain via Terminal (Windows)
 
-Setelah membuat tenant, jalankan skrip PowerShell untuk update `hosts`:
-```powershell
-.\setup-hosts.ps1
-```
+Untuk lingkungan pengembangan lokal (Windows), Anda perlu menambahkan domain atau subdomain ke file `hosts`. Kami sudah menyediakan *Artisan Command* khusus agar Anda tidak perlu mengedit file secara manual:
 
-Skrip ini akan menambahkan entri ke `hosts` file:
+```bash
+php artisan saas:register-domain
 ```
-127.0.0.1 jakarta.saas.test
-```
+Anda akan diminta memasukkan nama domain:
+- Jika mendaftarkan Root Domain, ketik: `saas.test`
+- Jika mendaftarkan Subdomain Tenant, cukup ketik _slug_ tenant-nya (contoh: `jakarta`), dan perintah ini akan otomatis menambahkan ke base domain menjadi `jakarta.saas.test`.
+
+> **Catatan:** Skrip ini akan otomatis membuka *Pop-Up Administrator* (UAC) pada Windows Anda sesaat. Harap tekan **Yes** untuk menyetujui injeksi *IP Resolution* ke file host Windows Anda.
 
 ### 3. Akses Tenant Panel
 
