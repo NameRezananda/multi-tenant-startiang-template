@@ -83,7 +83,10 @@ npm run build
 # 3. Eksekusi file migrasi baru (jika ada pembaruan struktur DB)
 php artisan migrate
 
-# 4. Bersihkan seluruh file cache sistem
+# 4. (Opsional) Jalankan seeder khusus jika tim menambahkan data master/referensi baru
+php artisan db:seed
+
+# 5. Bersihkan seluruh file cache sistem
 php artisan optimize:clear
 ```
 
