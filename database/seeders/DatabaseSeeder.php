@@ -17,9 +17,15 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(SomeSeeder::class);
 
-        $user = User::factory()->create([
+        $admin = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@saas.test',
+            'password' => bcrypt('password'), // password
+        ]);
+
+        $tenantUser = User::factory()->create([
+            'name' => 'Tenant Owner',
+            'email' => 'owner@saas.test',
             'password' => bcrypt('password'), // password
         ]);
 
@@ -33,8 +39,8 @@ class DatabaseSeeder extends Seeder
             'slug' => 'bandung',
         ]);
 
-        // Attach user to the tenants
-        $user->tenants()->attach([
+        // Attach tenant user to the tenants
+        $tenantUser->tenants()->attach([
             $tenantJakarta->id => ['role' => 'owner'],
             $tenantBandung->id => ['role' => 'owner'],
         ]);

@@ -118,6 +118,9 @@ Tenant panel dapat diakses melalui subdomain:
 ```
 http://jakarta.saas.test/app
 ```
+Untuk login ke dalam Tenant Panel, gunakan kredensial berikut (Sesuai Seeder):
+- Email: `owner@saas.test`
+- Password: `password`
 
 ## Struktur Proyek
 
