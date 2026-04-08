@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->domain(parse_url(config('app.url'), PHP_URL_HOST))
             ->login()
             ->colors([
                 'primary' => Color::Amber,
