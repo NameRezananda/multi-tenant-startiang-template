@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 $hostsPath = "$env:windir\System32\drivers\etc\hosts"
 $entries = @(
-    "127.0.0.1 jakarta.autohub.test",
-    "127.0.0.1 bandung.autohub.test"
+    "127.0.0.1 jakarta.saas.test",
+    "127.0.0.1 bandung.saas.test"
 )
 
 try {

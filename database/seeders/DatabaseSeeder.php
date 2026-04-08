@@ -18,18 +18,18 @@ class DatabaseSeeder extends Seeder
         // $this->call(SomeSeeder::class);
 
         $user = User::factory()->create([
-            'name' => 'AutoHub Admin',
-            'email' => 'admin@autohub.id',
+            'name' => 'Super Admin',
+            'email' => 'admin@saas.test',
             'password' => bcrypt('password'), // password
         ]);
 
         $tenantJakarta = \App\Models\Tenant::create([
-            'name' => 'AutoHub Jakarta',
+            'name' => 'Tenant A',
             'slug' => 'jakarta',
         ]);
 
         $tenantBandung = \App\Models\Tenant::create([
-            'name' => 'AutoHub Bandung',
+            'name' => 'Tenant B',
             'slug' => 'bandung',
         ]);
 

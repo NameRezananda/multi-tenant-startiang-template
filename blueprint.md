@@ -1,15 +1,15 @@
-# 🏎️ Project Blueprint: AutoHub SaaS (v3.3)
+# 🏎️ Project Blueprint: Multi-Tenant SaaS (v3.3)
 
-**Concept:** Showroom Management System + Automotive Magazine Aggregator
+**Concept:** SaaS Platform Template
 **Architecture:** Row-Level Multi-tenancy (Single Database) with Many-to-Many User Access
 **Tech Stack:** Laravel 13, Filament v5, PostgreSQL (ServBay), Livewire v3 (SPA Mode)
 
 ## 1. Arsitektur Terkini (Rencana)
 **Multi-Panel System:** 
 * **AdminPanelProvider (`/admin`):** Manajemen Global & Subscription.
-* **ShowroomPanelProvider (`/showroom`):** Operasional Showroom (Tenancy Enabled).
+* **AppPanelProvider (`/app`):** Operasional Tenant (Tenancy Enabled).
 
-**Many-to-Many Tenancy:** User terhubung ke Tenant melalui tabel pivot `tenant_user`. Satu akun bisa mengelola banyak cabang showroom dengan Native Tenant Switcher.
+**Many-to-Many Tenancy:** User terhubung ke Tenant melalui tabel pivot `tenant_user`. Satu akun bisa mengelola banyak cabang/tenant dengan Native Tenant Switcher.
 
 **Database Optimization:** PostgreSQL dengan fokus pada B-Tree Indexing untuk kolom `tenant_id`.
 
@@ -25,7 +25,7 @@ berdasarkan pengecekan kondisi source code terkini.
 
 ✅ **Phase 2: Filament Multi-Panel Setup**
 - [x] Generate `AdminPanelProvider`.
-- [x] Generate `ShowroomPanelProvider`.
+- [x] Generate `AppPanelProvider`.
 - [x] Registrasi Provider di `bootstrap/providers.php`.
 - [x] Implementasi Interface `HasTenants` pada model `User`. *(Selesai)*
 - [x] Hubungkan model `User` dan `Tenant` via `BelongsToMany`. *(Selesai)*
@@ -33,15 +33,15 @@ berdasarkan pengecekan kondisi source code terkini.
 ## 3. Current Configuration Code (Review Kode Aktual)
 Kondisi kode saat ini **SUDAH** mengikuti Tenancy Logic seperti pada blueprint awal.
 
-**A. `ShowroomPanelProvider.php`**
+**A. `AppPanelProvider.php`**
 Kondisi aktual sudah memiliki pemanggilan `login()`, `tenant(...)`, dan `spa()`.
 ```php
 // Status Aktual
 public function panel(Panel $panel): Panel
 {
     return $panel
-        ->id('showroom')
-        ->path('showroom')
+        ->id('app')
+        ->path('app')
         ->login()
         ->tenant(\App\Models\Tenant::class, slugAttribute: 'slug')
         ->spa()
@@ -75,6 +75,6 @@ Seluruh sistem yang dirancang di tahap dasar kini sudah terpasang rapi, dari inf
 
 **5. "The Grand Opening" (Lanjutan Setelah Setup Selesai)**
 Jika Poin 4 di atas sudah tuntas, langkah selanjutnya adalah:
-- [x] **Database Seeding:** Membuat data dummy agar bisa login ke `/showroom` dan melihat pilihan tenant. *(Selesai - Admin `admin@autohub.id` & Tenant tersimpan)*
-- [x] **Wildcard Subdomain Setup:** Mengubah akses dari `autohub.test/showroom` menjadi `nama-dealer.autohub.test`. *(Selesai - Setup domain tenant pada Provider)*
+- [x] **Database Seeding:** Membuat data dummy agar bisa login ke `/tenant` dan melihat pilihan tenant. *(Selesai - Admin `admin@saas.test` & Tenant tersimpan)*
+- [x] **Wildcard Subdomain Setup:** Mengubah akses dari `saas.test/app` menjadi `nama-tenant.saas.test`. *(Selesai - Setup domain tenant pada Provider)*
 - [x] **BelongsToTenant Trait:** Membuat Logic otomatis yang menyisipkan `tenant_id` secara otomatis ketika menambah mobil tanpa input manual. *(Selesai - Trait `BelongsToTenant` telah dibuat)*

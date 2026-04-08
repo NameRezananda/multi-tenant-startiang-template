@@ -19,26 +19,26 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class ShowroomPanelProvider extends PanelProvider
+class AppPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('showroom')
+            ->id('app')
             ->path('')
-            ->domain('{tenant:slug}.autohub.test')
+            ->domain('{tenant:slug}.saas.test')
             ->login()
             ->tenant(\App\Models\Tenant::class, slugAttribute: 'slug')
             ->spa()
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Showroom/Resources'), for: 'App\Filament\Showroom\Resources')
-            ->discoverPages(in: app_path('Filament/Showroom/Pages'), for: 'App\Filament\Showroom\Pages')
+            ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\Filament\App\Resources')
+            ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\Filament\App\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Showroom/Widgets'), for: 'App\Filament\Showroom\Widgets')
+            ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\Filament\App\Widgets')
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,

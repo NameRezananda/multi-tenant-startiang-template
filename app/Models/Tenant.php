@@ -18,7 +18,7 @@ class Tenant extends Model
         static::created(function (Tenant $tenant) {
             // Hanya aktif di environment local & OS Windows
             if (app()->environment('local') && PHP_OS_FAMILY === 'Windows') {
-                $domain = $tenant->slug . '.autohub.test';
+                $domain = $tenant->slug . '.saas.test';
                 
                 // Script Powershell untuk inject file hosts
                 $script = <<<PS
